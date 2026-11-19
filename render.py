@@ -105,9 +105,9 @@ def draw_table(draw):
         (753, 502, RU_BLUE, "RU"),
     ]
     for x, y, color, label in seats:
-        # thick arc hugging the underside of the seat, in the seat color
-        draw.arc((x - 7, y - 7, x + 57, y + 57), start=15, end=165,
-                 fill=color, width=5)
+        # arc hugging the underside of the seat, in the seat color
+        draw.arc((x - 5, y - 5, x + 55, y + 55), start=15, end=165,
+                 fill=color, width=3)
         draw.ellipse((x, y, x + 50, y + 50), fill=color, outline=BG, width=3)
         centered_text(draw, x + 25, y + 25, label, bold(14), WHITE)
 
@@ -132,7 +132,14 @@ def draw_lead_panel(draw):
 
 def draw_card(draw, x, y, fill, kicker, kicker_color, title, title_color,
               icon_color, body, body_color, tag_fill, tag_text, tag_color):
-    draw.rounded_rectangle((x, y, x + 296, y + 300), radius=22, fill=fill)
+    outline_map = {
+        CARD2_FILL: "#B9CFC6",
+        BLUE: "#1B41B8",
+        ORANGE: "#C95334",
+    }
+    outline = outline_map.get(fill)
+    draw.rounded_rectangle((x, y, x + 296, y + 300), radius=22, fill=fill,
+                           outline=outline, width=2)
     draw.text((x + 20, y + 20), kicker, font=mono(13), fill=kicker_color)
     draw.text((x + 20, y + 55), title, font=bold(31), fill=title_color)
     # icon: horizontal line + filled dot under the title
